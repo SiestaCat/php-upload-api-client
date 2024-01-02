@@ -1,0 +1,5 @@
+/.history
+/vendor/
+.phpunit.result.cache
+/tests/junk_files
+composer.lock
