@@ -1,4 +1,6 @@
-# phpfilemanager
+# PHP upload api - Client
+
+Client of https://github.com/SiestaCat/php-upload-api app
 
 Install:
 
