@@ -59,7 +59,7 @@ class ClientTest extends TestCase
 
     private function getClient():Client
     {
-        return new Client($this->base_url . '/api', 'changeme');
+        return new Client($this->base_url, 'changeme');
     }
 
     private function getSamplesFilesArray():array

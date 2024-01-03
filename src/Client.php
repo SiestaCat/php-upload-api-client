@@ -31,6 +31,11 @@ class Client
         return $json->upload_token;
     }
 
+    public function getUploadUrl(string $upload_token):string
+    {
+        return $this->base_url . 'upload/' . $upload_token;
+    }
+
     /**
      * @return File[]
      */
@@ -99,7 +104,7 @@ class Client
 
         $ch = curl_init();
 
-        $url = $this->base_url . $uri;
+        $url = $this->base_url . 'api/' . $uri;
 
         curl_setopt($ch, CURLOPT_URL, $url);
 
