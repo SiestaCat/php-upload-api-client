@@ -19,7 +19,7 @@ class Client
 
     public function __construct(string $base_url, private string $authorization_token, private bool $ssl_verify = true)
     {
-        $this->base_url = substr($base_url, -1) === '/' ? $base_url : $base_url . '/';
+        $this->base_url = self::parseBaseUrl($base_url);
     }
 
     public function request():string
@@ -31,9 +31,9 @@ class Client
         return $json->upload_token;
     }
 
-    public function getUploadUrl(string $upload_token):string
+    public function getUploadUrl(string $upload_token, ?string $base_url = null):string
     {
-        return $this->base_url . 'upload/' . $upload_token;
+        return ($base_url === null ? $this->base_url : self::parseBaseUrl($base_url)) . 'upload/' . $upload_token;
     }
 
     /**
@@ -149,5 +149,10 @@ class Client
         if(is_string($response) || is_null($response)) $this->last_curl_trace->response = $response;
 
         return $response;
+    }
+
+    private static function parseBaseUrl(string $url):string
+    {
+        return substr($url, -1) === '/' ? $url : $url . '/';
     }
 }
