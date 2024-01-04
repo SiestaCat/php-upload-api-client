@@ -69,6 +69,15 @@ class Client
         return $files;
     }
 
+    public function getStatus(string $upload_token):bool
+    {
+        $json = $this->parseJsonResponse($this->call_curl('status/' . $upload_token));
+
+        if(!property_exists($json, 'uploaded')) throw new JsonPropertyNotFoundException($json, 'uploaded');
+
+        return $json->uploaded;
+    }
+
     /**
      * Returns the tmp file path with the downloaded file
      */
